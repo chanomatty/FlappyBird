@@ -2,8 +2,8 @@ import java.awt.*;
 
 public class Bird extends GameObject implements Collidable {
     private double velocityY = 0;
-    private final double gravity = 0.4;     // smoother falling speed
-    private final double jumpStrength = -6.5; // gentler jump
+    private final double gravity = 0.4;    
+    private final double jumpStrength = -6.5; 
 
     public Bird(Image img, int x, int y, int width, int height) {
         super(x, y, width, height, img);
@@ -14,10 +14,8 @@ public class Bird extends GameObject implements Collidable {
         velocityY += gravity;
         y += velocityY;
 
-        // Prevent bird from flying off the top
         y = Math.max(y, 0);
 
-        // Prevent bird from falling below bottom
         if (y > 640 - height) {
             y = 640 - height;
         }

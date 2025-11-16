@@ -9,7 +9,7 @@ public class Pipe extends GameObject implements Collidable {
 
     @Override
     public void update() {
-        x -= 4; // Move pipe to the left
+        x -= 4;
     }
 
     @Override

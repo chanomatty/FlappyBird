@@ -23,7 +23,7 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
         addMouseListener(new MouseAdapter() {
         @Override
         public void mousePressed(MouseEvent e) {
-            handleInput();   // we will create this function
+            handleInput(); 
         }
     });
 
@@ -44,7 +44,6 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
     }
 
     private void handleInput() {
-    // Start game
         if (!gameStarted) {
             gameStarted = true;
             gameLoop.start();
@@ -52,13 +51,11 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
             return;
         }
 
-        // Restart after game over
         if (gameOver) {
             resetGame();
             return;
         }
 
-        // Normal jump
         bird.jump();
     }
 

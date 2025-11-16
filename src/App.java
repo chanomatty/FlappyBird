@@ -6,7 +6,6 @@ public class App {
         int boardWidth = 360;
         int boardHeight = 640;
 
-        // Load saved scores (shows persistence)
         ArrayList<Double> savedScores = ScoreManager.loadScores();
         System.out.println("Previous Scores: " + savedScores);
 
