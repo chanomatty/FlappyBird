@@ -20,6 +20,12 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
         setPreferredSize(new Dimension(boardWidth, boardHeight));
         setFocusable(true);
         addKeyListener(this);
+        addMouseListener(new MouseAdapter() {
+        @Override
+        public void mousePressed(MouseEvent e) {
+            handleInput();   // we will create this function
+        }
+    });
 
         try {
             backgroundImg = new ImageIcon(getClass().getResource("/flappybirdbg.png")).getImage();
@@ -36,6 +42,26 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
         placePipeTimer = new Timer(1500, e -> placePipes());
         gameLoop = new Timer(1000 / 60, this);
     }
+
+    private void handleInput() {
+    // Start game
+        if (!gameStarted) {
+            gameStarted = true;
+            gameLoop.start();
+            placePipeTimer.start();
+            return;
+        }
+
+        // Restart after game over
+        if (gameOver) {
+            resetGame();
+            return;
+        }
+
+        // Normal jump
+        bird.jump();
+    }
+
 
     private void placePipes() {
         int pipeWidth = 60;
@@ -73,7 +99,7 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
         if (!gameStarted) {
             g.drawString("FLAPPY BIRD", 60, boardHeight / 2 - 40);
             g.setFont(new Font("Arial", Font.PLAIN, 20));
-            g.drawString("Press SPACE to play", 75, boardHeight / 2);
+            g.drawString("Press SPACE/MOUSE to play", 40, boardHeight / 2);
         } else if (gameOver) {
             g.drawString("Game Over", 90, boardHeight / 2 - 60);
             g.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -125,20 +151,11 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            if (!gameStarted) {
-                gameStarted = true;
-                gameLoop.start();
-                placePipeTimer.start();
-                return;
-            }
-            if (!gameOver) {
-                bird.jump();
-            } else {
-                resetGame();
-            }
+    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+        handleInput();
         }
     }
+
 
     @Override public void keyTyped(KeyEvent e) {}
     @Override public void keyReleased(KeyEvent e) {}
