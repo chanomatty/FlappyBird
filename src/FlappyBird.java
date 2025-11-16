@@ -71,7 +71,7 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
         g.setFont(new Font("Arial", Font.BOLD, 32));
 
         if (!gameStarted) {
-            g.drawString("Get Started", 80, boardHeight / 2 - 40);
+            g.drawString("FLAPPY BIRD", 60, boardHeight / 2 - 40);
             g.setFont(new Font("Arial", Font.PLAIN, 20));
             g.drawString("Press SPACE to play", 75, boardHeight / 2);
         } else if (gameOver) {
@@ -99,7 +99,7 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
             }
         }
 
-        if (bird.getYPosition() > boardHeight) {
+        if (bird.getYPosition() >= boardHeight - bird.height) {
             throw new GameOverException("You fell!");
         }
 
